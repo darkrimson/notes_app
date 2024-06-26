@@ -11,7 +11,7 @@ class Note extends HiveObject {
   String content;
 
   @HiveField(2)
-  String createdAt;
+  DateTime createdAt;
 
   Note({required this.title, required this.content, required this.createdAt});
 }

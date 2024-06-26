@@ -58,7 +58,7 @@ class NoteDetailPage extends StatelessWidget {
                   final newNote = Note(
                     title: title,
                     content: content,
-                    createdAt: DateTime.now().toString(),
+                    createdAt: DateTime.now(),
                   );
                   noteProvider.addNote(newNote);
                 } else {

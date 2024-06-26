@@ -12,8 +12,7 @@ void main() async {
   Hive.registerAdapter(NoteAdapter());
   await Hive.openBox<Note>('notes');
 
-  runApp(ChangeNotifierProvider(
-      create: (context) => NoteProvider(), child: const NotesApp()));
+  runApp(const NotesApp());
 }
 
 class NotesApp extends StatelessWidget {
@@ -21,13 +20,16 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Notes App',
-        initialRoute: '/home_page',
-        routes: {
-          '/home_page': (context) => const HomePage(),
-          '/note_detail': (context) => NoteDetailPage(),
-        });
+    return ChangeNotifierProvider<NoteProvider>(
+      create: (context) => NoteProvider(),
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Notes App',
+          initialRoute: '/home_page',
+          routes: {
+            '/home_page': (context) => const HomePage(),
+            '/note_detail': (context) => const NoteDetailPage(),
+          }),
+    );
   }
 }

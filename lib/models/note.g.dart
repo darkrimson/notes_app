@@ -19,7 +19,7 @@ class NoteAdapter extends TypeAdapter<Note> {
     return Note(
       title: fields[0] as String,
       content: fields[1] as String,
-      createdAt: fields[2] as String,
+      createdAt: fields[2] as DateTime,
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:intl/intl.dart';
 import '../providers/note_provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,9 +8,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String formattedDate =
+        DateFormat('yyyy-MM-dd').format(DateTime.now());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notes'),
+        centerTitle: true,
+        title: Text('Notes $formattedDate'),
       ),
       body: Consumer<NoteProvider>(
         builder: (context, provider, child) {
