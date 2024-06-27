@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:notes_app/providers/note_provider.dart';
-import 'package:notes_app/models/note.dart';
+import 'package:tasks_app/providers/task_provider.dart';
 
 class TaskTrackerPage extends StatelessWidget {
   const TaskTrackerPage({super.key});
@@ -15,9 +14,9 @@ class TaskTrackerPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Consumer<NoteProvider>(
-              builder: (context, noteProvider, child) {
-                final completedTasks = noteProvider.getCompletedTasks();
+            child: Consumer<TaskProvider>(
+              builder: (context, taskProvider, child) {
+                final completedTasks = taskProvider.getCompletedTasks();
                 return Column(
                   children: [
                     const Text('Completed Tasks',
@@ -39,9 +38,9 @@ class TaskTrackerPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Consumer<NoteProvider>(
-              builder: (context, noteProvider, child) {
-                final pendingTasks = noteProvider.getPendingTasks();
+            child: Consumer<TaskProvider>(
+              builder: (context, taskProvider, child) {
+                final pendingTasks = taskProvider.getPendingTasks();
                 return Column(
                   children: [
                     const Text('Pending Tasks', style: TextStyle(fontSize: 20)),
@@ -57,7 +56,7 @@ class TaskTrackerPage extends StatelessWidget {
                             value: task.isCompleted,
                             onChanged: (bool? value) {
                               task.isCompleted = value!;
-                              noteProvider.updateNote(task);
+                              taskProvider.updateTask(task);
                             },
                           ),
                         );

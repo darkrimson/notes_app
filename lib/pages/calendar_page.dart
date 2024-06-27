@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/providers/note_provider.dart';
+import 'package:tasks_app/providers/task_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -40,9 +40,9 @@ class _CalendarPageState extends State<CalendarPage> {
             height: 8.0,
           ),
           Expanded(
-            child: Consumer<NoteProvider>(
-              builder: (context, noteProvider, child) {
-                final tasks = noteProvider.getTasksByDate(_selectedDay);
+            child: Consumer<TaskProvider>(
+              builder: (context, taskProvider, child) {
+                final tasks = taskProvider.getTasksByDate(_selectedDay);
                 if (tasks.isEmpty) {
                   return const Center(
                     child: Text('No tasks for this day'),
@@ -59,7 +59,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         value: task.isCompleted,
                         onChanged: (bool? value) {
                           task.isCompleted = value!;
-                          noteProvider.updateNote(task);
+                          taskProvider.updateTask(task);
                         },
                       ),
                     );

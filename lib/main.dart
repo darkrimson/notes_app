@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:notes_app/pages/note_detail_page.dart';
 import 'package:provider/provider.dart';
+import 'package:tasks_app/pages/task_detail_page.dart';
 
-import 'models/note.dart';
+import 'models/task.dart';
 import 'pages/calendar_page.dart';
 import 'pages/home_page.dart';
 import 'pages/task_tracker_page.dart';
-import 'providers/note_provider.dart';
+import 'providers/task_provider.dart';
 
 void main() async {
   await Hive.initFlutter();
-  Hive.registerAdapter(NoteAdapter());
-  await Hive.openBox<Note>('notes');
+  Hive.registerAdapter(TaskAdapter());
+  await Hive.openBox<Task>('tasks');
 
-  runApp(const NotesApp());
+  runApp(const TasksApp());
 }
 
-class NotesApp extends StatelessWidget {
-  const NotesApp({super.key});
+class TasksApp extends StatelessWidget {
+  const TasksApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<NoteProvider>(
-      create: (context) => NoteProvider(),
+    return ChangeNotifierProvider<TaskProvider>(
+      create: (context) => TaskProvider(),
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Notes App',
+          title: 'Tasks App',
           initialRoute: '/home_page',
           routes: {
             '/home_page': (context) => const HomePage(),
-            '/note_detail': (context) => const NoteDetailPage(),
+            '/task_detail': (context) => const TaskDetailPage(),
             '/calendar_page': (context) => const CalendarPage(),
             '/task_tracker_page': (context) => const TaskTrackerPage(),
           }),

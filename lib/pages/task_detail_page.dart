@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:notes_app/models/note.dart';
-import 'package:notes_app/providers/note_provider.dart';
+import 'package:tasks_app/models/task.dart';
+import 'package:tasks_app/providers/task_provider.dart';
 
-class NoteDetailPage extends StatelessWidget {
-  const NoteDetailPage({super.key});
+class TaskDetailPage extends StatelessWidget {
+  const TaskDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Note? note = ModalRoute.of(context)!.settings.arguments as Note?;
-    final titleController = TextEditingController(text: note?.title ?? '');
-    final contentController = TextEditingController(text: note?.content ?? '');
+    final Task? task = ModalRoute.of(context)!.settings.arguments as Task?;
+    final titleController = TextEditingController(text: task?.title ?? '');
+    final contentController = TextEditingController(text: task?.content ?? '');
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(note == null ? 'Add Note' : 'Edit Note'),
+        title: Text(task == null ? 'Add Task' : 'Edit Task'),
         actions: [
-          if (note != null)
+          if (task != null)
             IconButton(
               icon: const Icon(Icons.delete),
               onPressed: () {
-                Provider.of<NoteProvider>(context, listen: false)
-                    .deleteNote(note);
+                Provider.of<TaskProvider>(context, listen: false)
+                    .deleteTask(task);
                 Navigator.pop(context);
               },
             ),
@@ -51,26 +51,26 @@ class NoteDetailPage extends StatelessWidget {
                   return;
                 }
 
-                final noteProvider =
-                    Provider.of<NoteProvider>(context, listen: false);
+                final taskProvider =
+                    Provider.of<TaskProvider>(context, listen: false);
 
-                if (note == null) {
-                  final newNote = Note(
+                if (task == null) {
+                  final newTask = Task(
                     title: title,
                     content: content,
                     createdAt: DateTime.now(),
                     date: DateTime.now(),
                   );
-                  noteProvider.addNote(newNote);
+                  taskProvider.addTask(newTask);
                 } else {
-                  note.title = title;
-                  note.content = content;
-                  noteProvider.updateNote(note);
+                  task.title = title;
+                  task.content = content;
+                  taskProvider.updateTask(task);
                 }
 
                 Navigator.pop(context);
               },
-              child: Text(note == null ? 'Add Note' : 'Save Note'),
+              child: Text(task == null ? 'Add Task' : 'Save Task'),
             ),
           ],
         ),

@@ -1,9 +1,9 @@
 import 'package:hive/hive.dart';
 
-part 'note.g.dart';
+part 'task.g.dart';
 
 @HiveType(typeId: 0)
-class Note extends HiveObject {
+class Task extends HiveObject {
   @HiveField(0)
   String title;
 
@@ -19,7 +19,7 @@ class Note extends HiveObject {
   @HiveField(4)
   bool isCompleted = false; // Добавлено свойство для трекера задач
 
-  Note({
+  Task({
     required this.title,
     required this.content,
     required this.createdAt,

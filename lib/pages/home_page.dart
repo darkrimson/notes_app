@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import '../providers/note_provider.dart';
+import '../providers/task_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,25 +13,25 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Notes $formattedDate'),
+        title: Text('Tasks $formattedDate'),
       ),
-      body: Consumer<NoteProvider>(
+      body: Consumer<TaskProvider>(
         builder: (context, provider, child) {
           return ListView.builder(
-            itemCount: provider.notes.length,
+            itemCount: provider.tasks.length,
             itemBuilder: (context, index) {
-              final note = provider.notes[index];
+              final task = provider.tasks[index];
               return ListTile(
-                title: Text(note.title),
-                subtitle: Text(note.content),
+                title: Text(task.title),
+                subtitle: Text(task.content),
                 trailing: IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () {
-                    provider.deleteNote(note);
+                    provider.deleteTask(task);
                   },
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, '/note_detail', arguments: note);
+                  Navigator.pushNamed(context, '/task_detail', arguments: task);
                 },
               );
             },
@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, '/note_detail'),
+        onPressed: () => Navigator.pushNamed(context, '/task_detail'),
         child: const Icon(Icons.add),
       ),
       drawer: Drawer(
