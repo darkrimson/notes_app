@@ -13,5 +13,17 @@ class Note extends HiveObject {
   @HiveField(2)
   DateTime createdAt;
 
-  Note({required this.title, required this.content, required this.createdAt});
+  @HiveField(3)
+  DateTime date; // Добавлено свойство даты
+
+  @HiveField(4)
+  bool isCompleted = false; // Добавлено свойство для трекера задач
+
+  Note({
+    required this.title,
+    required this.content,
+    required this.createdAt,
+    required this.date,
+    this.isCompleted = false,
+  });
 }

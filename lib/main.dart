@@ -4,7 +4,9 @@ import 'package:notes_app/pages/note_detail_page.dart';
 import 'package:provider/provider.dart';
 
 import 'models/note.dart';
+import 'pages/calendar_page.dart';
 import 'pages/home_page.dart';
+import 'pages/task_tracker_page.dart';
 import 'providers/note_provider.dart';
 
 void main() async {
@@ -29,6 +31,8 @@ class NotesApp extends StatelessWidget {
           routes: {
             '/home_page': (context) => const HomePage(),
             '/note_detail': (context) => const NoteDetailPage(),
+            '/calendar_page': (context) => const CalendarPage(),
+            '/task_tracker_page': (context) => const TaskTrackerPage(),
           }),
     );
   }

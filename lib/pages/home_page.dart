@@ -42,6 +42,30 @@ class HomePage extends StatelessWidget {
         onPressed: () => Navigator.pushNamed(context, '/note_detail'),
         child: const Icon(Icons.add),
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            const DrawerHeader(
+              child: Text('Navigation'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: const Text('Calendar'),
+              onTap: () {
+                Navigator.pushNamed(context, '/calendar_page');
+              },
+            ),
+            ListTile(
+              title: const Text('Task Tracker'),
+              onTap: () {
+                Navigator.pushNamed(context, '/task_tracker_page');
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
